@@ -1,6 +1,8 @@
-# Ranger Finance MCP Server
+# Ranger Perps MCP Server
 
-This project provides a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server for interacting with the [Ranger Finance API](https://www.app.ranger.finance/trade).
+This project provides a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server for interacting with the [Ranger Finance API](https://www.app.ranger.finance/trade), specifically for **perpetuals (perps) trading on Solana**.
+
+For full documentation and API details, see the [Ranger API: Smart Trading on Solana Notion docs](https://wave-terrier-ffd.notion.site/Ranger-API-Smart-Trading-on-Solana-1d0f0480d2768019a7bbe464b142a102?pvs=4).
 
 It allows LLMs (like Claude via its desktop app) to query market data and prepare trading transactions using Ranger's Smart Order Router (SOR) and Data APIs.
 
