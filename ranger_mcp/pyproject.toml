@@ -1,0 +1,25 @@
+[project]
+name = "ranger-mcp-server"
+version = "0.1.0"
+description = "MCP Server for Ranger Finance API"
+authors = [{ name = "Your Name", email = "your@email.com" }]
+requires-python = ">=3.10" # FastMCP requires 3.10+
+dependencies = [
+    "fastmcp>=2.0.0", # Use the version based on jlowin-fastmcp.txt
+    "httpx>=0.25.0",
+    "pydantic-settings>=2.0.0",
+    "python-dotenv>=1.0.0"
+]
+
+[project.scripts]
+ranger-mcp = "ranger_mcp.__main__:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+# Add your preferred ruff configurations 
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ranger_mcp"] 
