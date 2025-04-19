@@ -1,3 +1,5 @@
+![Ranger MCP Banner](../assets/banner.png)
+
 # Ranger MCP Agent Examples
 
 This folder demonstrates how to build AI agents that interact with the [Ranger Perps MCP Server](../ranger_perps_mcp/README.md) using the [Model Context Protocol (MCP)](https://modelcontextprotocol.io) and the [`mcp-agent`](https://github.com/lastmile-ai/mcp-agent) framework.
@@ -13,6 +15,12 @@ This folder demonstrates how to build AI agents that interact with the [Ranger P
 - **LLM-Driven Workflows:**
   - Integrate with LLMs (like Claude, GPT-4, etc.) to create conversational trading assistants.
   - Use agent patterns (orchestrator, planner-evaluator, human-in-the-loop) to automate or semi-automate trading workflows.
+- **Mean Reversion Trading:**
+  - Use liquidation data to detect mean reversion opportunities and execute trades.
+- **Funding Rate Arbitrage:**
+  - Use funding rate data to detect arbitrage opportunities and execute trades.
+- **Data-Driven Signals:**
+  - Use market data to detect signals and execute trades.
 
 ## Example Agents
 
@@ -38,6 +46,55 @@ Below are example LLM-driven trading workflows you can build using the Ranger Pe
   - Use LLMs or Python code to compute Z-scores on liquidation data
 - **Execute trades during market capitulation events:**
   - Trigger SOR tools (e.g., `sor_get_trade_quote`, `sor_increase_position`) when signals are detected
+
+**Example: Mean Reversion Trading Agent**
+
+Below is a simplified example of a mean reversion agent that:
+
+- Fetches recent liquidation data
+- Calculates a Z-score for the latest liquidation volume
+- If the Z-score exceeds a threshold, it prepares a trade quote and (optionally) a transaction
+
+See [`examples/mean_reversion_agent.py`](examples/mean_reversion_agent.py) for a runnable version.
+
+```python
+import asyncio
+import numpy as np
+from mcp_agent.mcp.gen_client import gen_client
+
+ACCOUNT = "YourSolanaAccountAddressHere"
+Z_THRESHOLD = 2.0  # Example threshold for signal
+
+async def main():
+    async with gen_client("ranger_mcp", base_url="http://localhost:8000") as client:
+        # 1. Fetch recent liquidation volumes
+        liq_data = await client.call_tool("data_get_latest_liquidations", {"market": "SOL-PERP", "limit": 20})
+        volumes = [item["volume"] for item in liq_data]
+        latest = volumes[-1]
+        mean = np.mean(volumes[:-1])
+        std = np.std(volumes[:-1])
+        z = (latest - mean) / std if std > 0 else 0
+        print(f"Latest liquidation volume: {latest}, Z-score: {z:.2f}")
+
+        # 2. If Z-score exceeds threshold, get a trade quote
+        if z > Z_THRESHOLD:
+            params = {
+                "market": "SOL-PERP",
+                "side": "buy",
+                "size": 1.0,
+                "collateral": 100.0,
+                "account": ACCOUNT
+            }
+            quote = await client.call_tool("sor_get_trade_quote", params)
+            print("Trade quote:", quote)
+            # Optionally, prepare a transaction:
+            # tx = await client.call_tool("sor_increase_position", params)
+            # print("Prepared transaction:", tx)
+        else:
+            print("No mean reversion signal detected.")
+
+if __name__ == "__main__":
+    asyncio.run(main())
 
 ### 2. Funding Rate Arbitrage
 
@@ -71,3 +128,13 @@ These strategies can be implemented as LLM-driven agents, using the example patt
 - [USER_MANUAL.md](../ranger_perps_mcp/USER_MANUAL.md)
 - [`mcp-agent` framework](https://github.com/lastmile-ai/mcp-agent)
 - [Anthropic agent patterns](https://github.com/anthropics/anthropic-cookbook/tree/main/patterns/agents)
+
+## Summary
+
+This repository enables rapid prototyping of LLM-driven trading agents and bots for Solana perps using the Ranger MCP server. With modular agent patterns, real-time data, and trading tools, you can:
+- Build, test, and iterate on your own trading strategies
+- Leverage both code and LLMs for signal generation, risk management, and execution
+- Extend the provided examples to suit your workflow or research
+
+Experiment, adapt, and unlock the potential of the markets with Ranger and AI!
+```
