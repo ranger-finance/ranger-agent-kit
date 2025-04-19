@@ -20,7 +20,7 @@ Z_THRESHOLD = 2.0  # Example threshold for signal
 
 
 async def main():
-    async with gen_client("ranger_mcp", base_url="http://localhost:8000") as client:
+    async with gen_client("ranger_mcp") as client:
         # 1. Fetch recent liquidation volumes
         try:
             liq_data = await client.call_tool("data_get_latest_liquidations", {"market": "SOL-PERP", "limit": 20})
