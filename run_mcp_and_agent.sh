@@ -11,7 +11,9 @@ fi
 # Paths
 MCP_DIR="ranger_perps_mcp"
 AGENT_DIR="ranger-agent-examples/examples"
+AGENT_ROOT="ranger-agent-examples"
 MCP_VENV="$MCP_DIR/.venv"
+AGENT_VENV="$AGENT_ROOT/.venv"
 MCP_LOG="mcp_server.log"
 AGENT_LOG="agent.log"
 
@@ -35,11 +37,22 @@ fi
 
 cd ..
 
-# 3. Install agent dependencies (in user/global env)
+# 3. Setup agent environment
+cd "$AGENT_ROOT"
+if [ ! -d ".venv" ]; then
+    echo "Creating Python venv for agent..."
+    uv venv
+fi
+source .venv/bin/activate
+
+echo "Installing agent dependencies..."
 uv pip install mcp-agent
+
+cd ..
 
 # 4. Start tmux session
 SESSION="ranger_mcp_demo"
+tmux kill-session -t $SESSION 2>/dev/null || true
 tmux new-session -d -s $SESSION
 
 # 5. Start MCP server in pane 0
@@ -47,7 +60,7 @@ tmux send-keys -t $SESSION:0 "cd $MCP_DIR && source .venv/bin/activate && python
 
 # 6. Start agent in pane 1
 tmux split-window -h -t $SESSION:0
-tmux send-keys -t $SESSION:0.1 "cd $AGENT_DIR && python single_tool_call_agent.py 2>&1 | tee ../../$AGENT_LOG" C-m
+tmux send-keys -t $SESSION:0.1 "cd $AGENT_ROOT && source .venv/bin/activate && cd examples && python single_tool_call_agent.py 2>&1 | tee ../../$AGENT_LOG" C-m
 
 # 7. Attach to tmux session
 tmux select-pane -t $SESSION:0.0
