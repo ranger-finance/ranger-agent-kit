@@ -1,4 +1,6 @@
-![Ranger MCP Banner](../assets/banner.png)
+<p align="center">
+  <img src="../assets/banner.png" alt="Ranger MCP Banner" width="620" height="380" />
+</p>
 
 # Ranger MCP Agent Examples
 
