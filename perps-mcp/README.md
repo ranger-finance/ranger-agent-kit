@@ -1,4 +1,4 @@
-# Ranger Perps MCP Server
+# Perps MCP Server
 
 This project provides a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server for interacting with the [Ranger Finance API](https://www.app.ranger.finance/trade), specifically for **perpetuals (perps) trading on Solana**.
 
@@ -20,7 +20,7 @@ It allows LLMs (like Claude via its desktop app) to query market data and prepar
 1.  **Clone the repository:**
     ```bash
     git clone <your-repo-url>
-    cd ranger-mcp-server
+    cd perps-mcp
     ```
 2.  **Install dependencies:** We recommend using `uv`.
     ```bash
@@ -41,7 +41,7 @@ You can run the server directly using the installed script or python:
 
 ```bash
 # Using the installed script
-ranger-mcp
+perps-mcp
 ```
 
 or

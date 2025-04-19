@@ -1,8 +1,8 @@
-# 🛠️ Ranger MCP Server – User Manual
+# 🛠️ Perps MCP Server – User Manual
 
 ## Overview
 
-The Ranger MCP server lets you interact with the Ranger Finance API using the Model Context Protocol (MCP). You can use it to fetch market data, get trade quotes, and prepare transactions for execution on Solana, all via a modular, LLM-friendly interface.
+The Perps MCP server lets you interact with the Perps Finance API using the Model Context Protocol (MCP). You can use it to fetch market data, get trade quotes, and prepare transactions for execution on Solana, all via a modular, LLM-friendly interface.
 
 ---
 
@@ -11,7 +11,7 @@ The Ranger MCP server lets you interact with the Ranger Finance API using the Mo
 - **Python 3.10+** (Recommended: 3.10, 3.11, or 3.12)
 - **[uv](https://github.com/astral-sh/uv) package manager** (for fast, reliable Python environments)
 - **git** (for cloning the repo)
-- **A Ranger Finance API key** (get one from your Ranger Finance account)
+- **A Perps Finance API key** (get one from your Perps Finance account)
 - (Optional) **Node.js** (if you want to use the FastMCP Inspector UI)
 
 ---
@@ -20,7 +20,7 @@ The Ranger MCP server lets you interact with the Ranger Finance API using the Mo
 
 ```bash
 git clone <your-repo-url>
-cd ranger-mcp-server
+cd perps-mcp
 ```
 
 ---
@@ -49,7 +49,7 @@ uv pip install -e .
    ```bash
    cp .env.example .env
    ```
-2. **Edit `.env`** and set your actual Ranger API key:
+2. **Edit `.env`** and set your actual Perps API key:
    ```
    RANGER_API_KEY="sk_test_..."
    RANGER_SOR_BASE_URL="https://staging-sor-api-437363704888.asia-northeast1.run.app"
@@ -65,7 +65,7 @@ You can start the server in two ways:
 ### **A. Standalone (for Claude Desktop or other MCP clients):**
 
 ```bash
-ranger-mcp
+perps-mcp
 ```
 
 or
@@ -95,7 +95,7 @@ fastmcp dev src/ranger_mcp/hub.py:ranger_mcp
 ### **B. With Claude Desktop**
 
 - Add the MCP server as a plugin in Claude Desktop.
-- Ask Claude to use Ranger (e.g., "Get my positions using Ranger").
+- Ask Claude to use Perps (e.g., "Get my positions using Perps").
 - Claude will call the appropriate tool and return the result.
 
 ### **C. Programmatically (Python)**
@@ -142,7 +142,7 @@ Each tool's parameters and expected responses are visible in the Inspector UI or
 - **API errors?**
 
   - Make sure your API key is correct and has access.
-  - Check the Ranger API status.
+  - Check the Perps API status.
 
 - **Want more logs?**
   - Set `FASTMCP_SERVER_LOG_LEVEL="DEBUG"` in your `.env` for verbose output.
@@ -169,7 +169,7 @@ uv pip install -e .
 
 ## 12. **Getting Help**
 
-- **Ranger Finance API docs:** [https://www.app.ranger.finance/trade](https://www.app.ranger.finance/trade)
+- **Perps Finance API docs:** [https://www.app.ranger.finance/trade](https://www.app.ranger.finance/trade)
 - **FastMCP docs:** [https://modelcontextprotocol.io](https://modelcontextprotocol.io)
 - **Ask your dev team or open an issue in your repo!**
 

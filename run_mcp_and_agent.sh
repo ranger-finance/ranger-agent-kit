@@ -20,12 +20,12 @@ AGENT_LOG="agent.log"
 # 1. Setup MCP server environment
 cd "$MCP_DIR"
 if [ ! -d ".venv" ]; then
-    echo "Creating Python venv for MCP server..."
+    echo "Creating Python venv for Perps MCP server..."
     uv venv
 fi
 source .venv/bin/activate
 
-echo "Installing MCP server dependencies..."
+echo "Installing Perps MCP server dependencies..."
 uv pip install -e .
 
 # 2. Ensure .env exists
@@ -51,11 +51,11 @@ uv pip install mcp-agent
 cd ..
 
 # 4. Start tmux session
-SESSION="ranger_mcp_demo"
+SESSION="perps_mcp_demo"
 tmux kill-session -t $SESSION 2>/dev/null || true
 tmux new-session -d -s $SESSION
 
-# 5. Start MCP server in pane 0
+# 5. Start Perps MCP server in pane 0
 tmux send-keys -t $SESSION:0 "cd $MCP_DIR && source .venv/bin/activate && python src/ranger_mcp/__main__.py 2>&1 | tee ../$MCP_LOG" C-m
 
 # 6. Start agent in pane 1
