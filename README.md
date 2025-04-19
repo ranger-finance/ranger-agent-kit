@@ -14,14 +14,12 @@
   The core Model Context Protocol (MCP) server for Ranger Perps. Contains the backend code, configuration, and server logic for handling agent requests, market data, and protocol integration.
 
   - `src/ranger_mcp/`: Main Python package for the MCP server, including data models, API logic, and entrypoint.
-  - `.venv/`: (If present) Python virtual environment for the MCP server.
   - `USER_MANUAL.md`: Detailed instructions for running and configuring the MCP server.
 
 - **`ranger-agent-examples/`**  
   Example agents and agent orchestration scripts built using the MCP agent framework.
 
   - `examples/`: Ready-to-run agent scripts (mean reversion, orchestrator, planner, etc.) demonstrating different strategies and workflows.
-  - `.venv/`: (If present) Python virtual environment for the agent examples.
 
 - **`ranger-web-agent/`**  
   Contains web-based agent demos or notebooks, such as Jupyter notebooks for building autonomous web agents.
