@@ -24,6 +24,47 @@ This folder contains example agents that demonstrate:
 
 See the `examples/` subfolder for runnable agent scripts and workflow patterns.
 
+## Demo Trading Strategies 💲
+
+Below are example LLM-driven trading workflows you can build using the Ranger Perps MCP server and agent patterns:
+
+---
+
+### 1. Mean Reversion Trading
+
+- **Monitor liquidation volumes** using `data_get_latest_liquidations` and related tools
+- **Calculate statistical deviations (Z-score):**
+  - Identify unusual market liquidations that often lead to trading opportunities
+  - Use LLMs or Python code to compute Z-scores on liquidation data
+- **Execute trades during market capitulation events:**
+  - Trigger SOR tools (e.g., `sor_get_trade_quote`, `sor_increase_position`) when signals are detected
+
+### 2. Funding Rate Arbitrage
+
+- **Exploit funding rate differentials between venues:**
+  - Use tools like `data_get_funding_arbs` and `data_get_oi_weighted_funding_rate`
+- **Automated spread capture:**
+  - LLM/agent logic can monitor and act on funding rate spreads
+- **Risk-managed position execution:**
+  - Combine with position monitoring and liquidation data for safer trades
+
+### 3. Data-Driven Signals
+
+Key metrics available via MCP tools:
+
+- **Daily Summary:**
+  - Compile your own account summaries using `data_get_positions`, `data_get_trade_history`
+- **OI Weighted Funding Rate analysis:**
+  - Assess market bias and spot potential reversals
+- **Open Interest tracking:**
+  - Use OI data to monitor market participation and crowding
+- **Trade history & Position monitoring:**
+  - Build dashboards or alerting agents for your portfolio
+
+---
+
+These strategies can be implemented as LLM-driven agents, using the example patterns and tools provided in this repo.
+
 ## References
 
 - [Ranger Perps MCP Server](../ranger_perps_mcp/README.md)
