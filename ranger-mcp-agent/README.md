@@ -57,44 +57,29 @@ Below is a simplified example of a mean reversion agent that:
 
 See [`examples/mean_reversion_agent.py`](examples/mean_reversion_agent.py) for a runnable version.
 
-```python
-import asyncio
-import numpy as np
-from mcp_agent.mcp.gen_client import gen_client
+## How to Run the Example Agents
 
-ACCOUNT = "YourSolanaAccountAddressHere"
-Z_THRESHOLD = 2.0  # Example threshold for signal
+1. **Install dependencies:**
+   ```bash
+   pip install mcp-agent numpy
+   ```
+2. **Start the Ranger MCP server:**
+   - Follow the instructions in [USER_MANUAL.md](../ranger_perps_mcp/USER_MANUAL.md) to start the server (default: `http://localhost:8000`).
+3. **Set your account address:**
+   - Edit the `ACCOUNT` variable in the example scripts to your Solana account address.
+4. **Run an example agent:**
+   ```bash
+   python examples/single_tool_call_agent.py
+   # or
+   python examples/orchestrator_agent.py
+   # or
+   python examples/mean_reversion_agent.py
+   # etc.
+   ```
+5. **(Optional) Change MCP server URL:**
+   - If your MCP server is running elsewhere, update the `base_url` in the scripts.
 
-async def main():
-    async with gen_client("ranger_mcp", base_url="http://localhost:8000") as client:
-        # 1. Fetch recent liquidation volumes
-        liq_data = await client.call_tool("data_get_latest_liquidations", {"market": "SOL-PERP", "limit": 20})
-        volumes = [item["volume"] for item in liq_data]
-        latest = volumes[-1]
-        mean = np.mean(volumes[:-1])
-        std = np.std(volumes[:-1])
-        z = (latest - mean) / std if std > 0 else 0
-        print(f"Latest liquidation volume: {latest}, Z-score: {z:.2f}")
-
-        # 2. If Z-score exceeds threshold, get a trade quote
-        if z > Z_THRESHOLD:
-            params = {
-                "market": "SOL-PERP",
-                "side": "buy",
-                "size": 1.0,
-                "collateral": 100.0,
-                "account": ACCOUNT
-            }
-            quote = await client.call_tool("sor_get_trade_quote", params)
-            print("Trade quote:", quote)
-            # Optionally, prepare a transaction:
-            # tx = await client.call_tool("sor_increase_position", params)
-            # print("Prepared transaction:", tx)
-        else:
-            print("No mean reversion signal detected.")
-
-if __name__ == "__main__":
-    asyncio.run(main())
+See the `examples/` folder for more agent patterns and details.
 
 ### 2. Funding Rate Arbitrage
 
@@ -132,9 +117,13 @@ These strategies can be implemented as LLM-driven agents, using the example patt
 ## Summary
 
 This repository enables rapid prototyping of LLM-driven trading agents and bots for Solana perps using the Ranger MCP server. With modular agent patterns, real-time data, and trading tools, you can:
+
 - Build, test, and iterate on your own trading strategies
 - Leverage both code and LLMs for signal generation, risk management, and execution
 - Extend the provided examples to suit your workflow or research
 
 Experiment, adapt, and unlock the potential of the markets with Ranger and AI!
+
+```
+
 ```
