@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="../assets/banner.png" alt="Ranger MCP Banner" width="620" height="380" />
+  <img src="../assets/banner.png" alt="Ranger MCP Banner" width="320" />
 </p>
 
 # Ranger MCP Agent Examples
@@ -125,7 +125,3 @@ This repository enables rapid prototyping of LLM-driven trading agents and bots 
 - Extend the provided examples to suit your workflow or research
 
 Experiment, adapt, and unlock the potential of the markets with Ranger and AI!
-
-```
-
-```
