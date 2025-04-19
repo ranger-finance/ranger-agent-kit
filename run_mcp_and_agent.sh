@@ -9,7 +9,7 @@ if ! command -v uv &> /dev/null; then
 fi
 
 # Paths
-MCP_DIR="ranger_perps_mcp"
+MCP_DIR="perps-mcp"
 AGENT_DIR="ranger-agent-examples/examples"
 AGENT_ROOT="ranger-agent-examples"
 MCP_VENV="$MCP_DIR/.venv"
