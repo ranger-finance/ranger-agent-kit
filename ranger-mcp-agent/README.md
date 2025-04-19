@@ -2,6 +2,8 @@
   <img src="../assets/banner.png" alt="Ranger MCP Banner" width="320" />
 </p>
 
+---
+
 # Ranger MCP Agent Examples
 
 This folder demonstrates how to build AI agents that interact with the [Ranger Perps MCP Server](../ranger_perps_mcp/README.md) using the [Model Context Protocol (MCP)](https://modelcontextprotocol.io) and the [`mcp-agent`](https://github.com/lastmile-ai/mcp-agent) framework.
@@ -108,6 +110,54 @@ Key metrics available via MCP tools:
 ---
 
 These strategies can be implemented as LLM-driven agents, using the example patterns and tools provided in this repo.
+
+## How It Works: Agent & MCP Server Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant MCPServer as Ranger MCP Server
+    participant Agent as Agent Script
+
+    User->>MCPServer: Start MCP server (python src/ranger_mcp/__main__.py)
+    User->>Agent: Run agent script (python examples/mean_reversion_agent.py)
+    Agent->>MCPServer: Connect (gen_client)
+    Agent->>MCPServer: Call tool (e.g., data_get_latest_liquidations)
+    MCPServer-->>Agent: Return data
+    Agent->>Agent: Analyze data (e.g., Z-score)
+    Agent->>MCPServer: Call tool (e.g., sor_get_trade_quote)
+    MCPServer-->>Agent: Return trade quote
+    Agent->>MCPServer: (Optional) Call tool (sor_increase_position)
+    MCPServer-->>Agent: Return transaction
+    Agent-->>User: Print results / next steps
+```
+
+---
+
+## Step-by-Step: Running the Agent and MCP Server
+
+1. **Install dependencies**
+   ```bash
+   pip install mcp-agent numpy
+   ```
+2. **Start the Ranger MCP server**
+   ```bash
+   python ../ranger_perps_mcp/src/ranger_mcp/__main__.py
+   # or if installed as a script
+   # ranger-mcp
+   ```
+3. **Set your account address**
+   - Edit the `ACCOUNT` variable in the example scripts to your Solana account address.
+4. **Run an example agent**
+   ```bash
+   python examples/mean_reversion_agent.py
+   # or
+   python examples/orchestrator_agent.py
+   ```
+5. **(Optional) Change MCP server URL**
+   - If your MCP server is running elsewhere, update the `base_url` in the scripts.
+
+---
 
 ## References
 
