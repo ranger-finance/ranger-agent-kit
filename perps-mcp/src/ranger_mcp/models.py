@@ -136,8 +136,7 @@ class SorApiResponse(BaseModel):
 # --- Data Models ---
 
 
-Platform = Literal["DRIFT", "FLASH", "JUPITER",
-                   "ADRENA"]  # Add others if needed
+Platform = str  # Allow any string for platform to support new protocols
 
 
 class Position(BaseModel):
@@ -155,7 +154,7 @@ class Position(BaseModel):
     close_fee: float
     created_at: str  # Using str for simplicity, could use datetime
     opened_at: str
-    platform: Platform
+    platform: str  # Changed from Platform to str
 
 
 class GetPositionsResponse(BaseModel):
@@ -177,7 +176,7 @@ class Trade(BaseModel):
     is_closed: bool
     created_at: str
     opened_at: str
-    platform: Platform
+    platform: str  # Changed from Platform to str
     tx_signature: str
 
 
@@ -190,7 +189,7 @@ class Liquidation(BaseModel):
     market_id: str
     user_account: str
     liquidator: str
-    platform: Platform
+    platform: str  # Changed from Platform to str
     quantity: float
     price: float
     created_at: str
@@ -207,7 +206,7 @@ class LiquidationTotals(BaseModel):
 
 class CapitulationSignal(BaseModel):
     symbol: str
-    platform: Platform
+    platform: str  # Changed from Platform to str
     z_score: float
     total_liquidated: float
     mean_liquidation: float
@@ -216,14 +215,14 @@ class CapitulationSignal(BaseModel):
 
 class LiquidationHeatmapEntry(BaseModel):
     symbol: str
-    platform: Platform
+    platform: str  # Changed from Platform to str
     start: str  # Timestamp string
     total_liquidated_usd: float
 
 
 class LargestLiquidation(BaseModel):
     symbol: str
-    platform: Platform
+    platform: str  # Changed from Platform to str
     timestamp: str
     quantity: float
     price: float
@@ -233,15 +232,15 @@ class LargestLiquidation(BaseModel):
 
 class FundingRateArb(BaseModel):
     symbol: str
-    platform_a: Platform
+    platform_a: str  # Changed from Platform to str
     rate_a: float
-    platform_b: Platform
+    platform_b: str  # Changed from Platform to str
     rate_b: float
     rate_diff: str  # Representing Decimal
 
 
 class AccumulatedRate(BaseModel):
-    platform: Platform
+    platform: str  # Changed from Platform to str
     symbol: str
     created_at: str
     accumulated_rate: str  # Decimal string
@@ -262,7 +261,7 @@ class OiWeightedFundingRate(BaseModel):
 
 class FundingRateTrend(BaseModel):
     symbol: str
-    platform: Platform
+    platform: str  # Changed from Platform to str
     mean: float
     std_dev: float
     z_score: float
