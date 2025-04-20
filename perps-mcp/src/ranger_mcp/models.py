@@ -147,7 +147,7 @@ class Position(BaseModel):
     entry_price: float
     liquidation_price: float | None = None  # Seems optional in some cases
     position_leverage: float
-    real_collateral: float
+    real_collateral: float | None = None
     borrow_fee: float
     funding_fee: float
     open_fee: float

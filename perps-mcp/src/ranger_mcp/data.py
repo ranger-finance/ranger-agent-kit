@@ -256,6 +256,10 @@ async def get_oi_weighted_funding_rates(ctx: Context | None = None) -> list[OiWe
     if ctx:
         await ctx.info("Fetching OI-weighted funding rates")
     response_data = await _call_ranger_data_api("/v1/funding_rates/oi_weighted")
+    # Ensure oi_weighted_funding_rate is a string for each item
+    for item in response_data:
+        if "oi_weighted_funding_rate" in item:
+            item["oi_weighted_funding_rate"] = str(item["oi_weighted_funding_rate"])
     return [OiWeightedFundingRate(**item) for item in response_data]
 
 
