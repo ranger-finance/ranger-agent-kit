@@ -13,7 +13,7 @@ ENV/
 
 # Environment variables
 .env
-
+.pytest_cache/
 
 # Pytest
 .cache/
