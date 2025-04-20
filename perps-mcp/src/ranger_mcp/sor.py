@@ -165,3 +165,43 @@ async def withdraw_balance(
 
 # Note: Deposit/Withdraw Collateral endpoints are marked as WIP in the API docs, so they are omitted here.
 # They could be added similarly if/when they become available.
+
+@sor_mcp.resource("sor://get_trade_quote")
+def resource_get_trade_quote() -> dict:
+    return {
+        "resource": "get_trade_quote",
+        "description": "Get a quote for a potential trade, including price, liquidity, and routing. Does NOT execute the trade.",
+        "parameters": ["params"]
+    }
+
+@sor_mcp.resource("sor://increase_position")
+def resource_increase_position() -> dict:
+    return {
+        "resource": "increase_position",
+        "description": "Open a new position or increase the size of an existing one. Returns a base64 encoded transaction message that needs to be signed and submitted by the user/client.",
+        "parameters": ["params"]
+    }
+
+@sor_mcp.resource("sor://decrease_position")
+def resource_decrease_position() -> dict:
+    return {
+        "resource": "decrease_position",
+        "description": "Decrease the size of an existing position using a specific venue. Returns a base64 encoded transaction message that needs to be signed and submitted by the user/client.",
+        "parameters": ["params"]
+    }
+
+@sor_mcp.resource("sor://close_position")
+def resource_close_position() -> dict:
+    return {
+        "resource": "close_position",
+        "description": "Close an existing position completely, potentially specifying a venue or closing all. Returns a base64 encoded transaction message that needs to be signed and submitted by the user/client.",
+        "parameters": ["params"]
+    }
+
+@sor_mcp.resource("sor://withdraw_balance_drift")
+def resource_withdraw_balance_drift() -> dict:
+    return {
+        "resource": "withdraw_balance_drift",
+        "description": "Withdraw available balance from a Drift sub-account. Returns a base64 encoded transaction message that needs to be signed and submitted by the user/client.",
+        "parameters": ["params"]
+    }

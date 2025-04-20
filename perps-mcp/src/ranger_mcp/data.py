@@ -274,3 +274,107 @@ async def get_funding_rate_trend(
     params = {k: v for k, v in params.items() if v is not None}
     response_data = await _call_ranger_data_api("/v1/funding_rates/trend", params=params)
     return [FundingRateTrend(**item) for item in response_data]
+
+@data_mcp.resource("data://get_positions")
+def resource_get_positions() -> dict:
+    return {
+        "resource": "get_positions",
+        "description": "Retrieve user positions across venues, with optional filters.",
+        "parameters": ["public_key", "platforms", "symbols", "from_date"]
+    }
+
+@data_mcp.resource("data://get_trade_history")
+def resource_get_trade_history() -> dict:
+    return {
+        "resource": "get_trade_history",
+        "description": "Retrieve user trade history across venues, with optional filters.",
+        "parameters": ["public_key", "platforms", "symbols", "start_time", "end_time"]
+    }
+
+@data_mcp.resource("data://get_latest_liquidations")
+def resource_get_latest_liquidations() -> dict:
+    return {
+        "resource": "get_latest_liquidations",
+        "description": "Fetches the 10 most recent liquidation events.",
+        "parameters": []
+    }
+
+@data_mcp.resource("data://get_liquidation_totals")
+def resource_get_liquidation_totals() -> dict:
+    return {
+        "resource": "get_liquidation_totals",
+        "description": "Provides total USD value of liquidations over recent time intervals (1h, 4h, 12h, 24h).",
+        "parameters": []
+    }
+
+@data_mcp.resource("data://get_liquidation_capitulation_signals")
+def resource_get_liquidation_capitulation_signals() -> dict:
+    return {
+        "resource": "get_liquidation_capitulation_signals",
+        "description": "Identifies potential market capitulation events based on liquidation volume exceeding statistical norms (Z-score).",
+        "parameters": ["threshold"]
+    }
+
+@data_mcp.resource("data://get_liquidation_heatmap")
+def resource_get_liquidation_heatmap() -> dict:
+    return {
+        "resource": "get_liquidation_heatmap",
+        "description": "Provides aggregated liquidation values (USD) bucketed by time granularity over the last 7 days.",
+        "parameters": ["granularity"]
+    }
+
+@data_mcp.resource("data://get_largest_liquidations")
+def resource_get_largest_liquidations() -> dict:
+    return {
+        "resource": "get_largest_liquidations",
+        "description": "Retrieves the largest individual liquidation events within a specified time window.",
+        "parameters": ["granularity", "limit"]
+    }
+
+@data_mcp.resource("data://get_funding_rate_arbs")
+def resource_get_funding_rate_arbs() -> dict:
+    return {
+        "resource": "get_funding_rate_arbs",
+        "description": "Identifies potential funding rate arbitrage opportunities between platforms.",
+        "parameters": ["min_diff"]
+    }
+
+@data_mcp.resource("data://get_accumulated_funding_rates")
+def resource_get_accumulated_funding_rates() -> dict:
+    return {
+        "resource": "get_accumulated_funding_rates",
+        "description": "Retrieves historical accumulated funding rates.",
+        "parameters": ["symbol", "granularity", "platform"]
+    }
+
+@data_mcp.resource("data://get_accumulated_borrow_rates")
+def resource_get_accumulated_borrow_rates() -> dict:
+    return {
+        "resource": "get_accumulated_borrow_rates",
+        "description": "Retrieves historical accumulated borrow rates.",
+        "parameters": ["symbol", "granularity", "platform"]
+    }
+
+@data_mcp.resource("data://get_extreme_funding_rates")
+def resource_get_extreme_funding_rates() -> dict:
+    return {
+        "resource": "get_extreme_funding_rates",
+        "description": "Fetches markets with the highest and lowest accumulated funding rates.",
+        "parameters": ["granularity", "limit"]
+    }
+
+@data_mcp.resource("data://get_oi_weighted_funding_rates")
+def resource_get_oi_weighted_funding_rates() -> dict:
+    return {
+        "resource": "get_oi_weighted_funding_rates",
+        "description": "Provides the open interest-weighted average funding rate for each symbol across all platforms.",
+        "parameters": []
+    }
+
+@data_mcp.resource("data://get_funding_rate_trend")
+def resource_get_funding_rate_trend() -> dict:
+    return {
+        "resource": "get_funding_rate_trend",
+        "description": "Calculates the recent funding rate trend for a symbol (optionally by platform).",
+        "parameters": ["symbol", "platform"]
+    }
