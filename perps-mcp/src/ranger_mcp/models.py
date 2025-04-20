@@ -1,5 +1,5 @@
 from typing import Annotated, Any, Literal
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 
 # --- SOR Models ---
 
@@ -238,6 +238,10 @@ class FundingRateArb(BaseModel):
     rate_b: float
     rate_diff: str  # Representing Decimal
 
+    @validator('rate_diff', pre=True)
+    def rate_diff_to_str(cls, v):
+        return str(v) if v is not None else v
+
 
 class AccumulatedRate(BaseModel):
     platform: str  # Changed from Platform to str
@@ -245,6 +249,10 @@ class AccumulatedRate(BaseModel):
     created_at: str
     accumulated_rate: str  # Decimal string
     base_granularity: str
+
+    @validator('accumulated_rate', pre=True)
+    def accumulated_rate_to_str(cls, v):
+        return str(v) if v is not None else v
 
 
 class ExtremeFundingRates(BaseModel):
