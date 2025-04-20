@@ -1,5 +1,9 @@
 # 🛠️ Ranger Perps MCP – User Manual
 
+<p align="center">
+  <img src="../assets/ranger_mcp_agent.png" alt="Ranger MCP Agent" width="540" />
+</p>
+
 ## Overview
 
 The Ranger Perps MCP lets you interact with the perps mcp API using the Model Context Protocol (MCP). You can use it to fetch market data, get trade quotes, and prepare transactions for execution on Solana, all via a modular, LLM-friendly interface.
@@ -181,3 +185,5 @@ uv pip install -e .
 - See the README for details on running tests.
 
 If you want a PDF or markdown version of this manual, or want to customize it for your team, just let me know!
+
+![Ranger MCP Agent](./path/to/@ranger_mcp_agent.png)
