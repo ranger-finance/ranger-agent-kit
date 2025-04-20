@@ -15,7 +15,11 @@ from fastmcp.exceptions import ToolError
 # Data MCP Server instance
 data_mcp = FastMCP("RangerData")
 
-# Helper function for making API calls
+# Example static resource returning simple text
+@data_mcp.resource("config://app-version")
+def get_app_version() -> str:
+    """Returns the application version."""
+    return "v2.1.0"
 
 
 async def _call_ranger_data_api(endpoint: str, params: dict[str, Any] | None = None) -> Any:
