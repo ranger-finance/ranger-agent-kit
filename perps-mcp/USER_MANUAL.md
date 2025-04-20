@@ -1,8 +1,8 @@
-# 🛠️ Perps MCP Server – User Manual
+# 🛠️ Perps MCP – User Manual
 
 ## Overview
 
-The Perps MCP server lets you interact with the Perps Finance API using the Model Context Protocol (MCP). You can use it to fetch market data, get trade quotes, and prepare transactions for execution on Solana, all via a modular, LLM-friendly interface.
+The Perps MCP lets you interact with the perps mcp API using the Model Context Protocol (MCP). You can use it to fetch market data, get trade quotes, and prepare transactions for execution on Solana, all via a modular, LLM-friendly interface.
 
 ---
 
@@ -11,7 +11,7 @@ The Perps MCP server lets you interact with the Perps Finance API using the Mode
 - **Python 3.10+** (Recommended: 3.10, 3.11, or 3.12)
 - **[uv](https://github.com/astral-sh/uv) package manager** (for fast, reliable Python environments)
 - **git** (for cloning the repo)
-- **A Perps Finance API key** (get one from your Perps Finance account)
+- **A perps mcp API key** (get one from your perps mcp account)
 - (Optional) **Node.js** (if you want to use the FastMCP Inspector UI)
 
 ---
@@ -169,7 +169,7 @@ uv pip install -e .
 
 ## 12. **Getting Help**
 
-- **Perps Finance API docs:** [https://www.app.ranger.finance/trade](https://www.app.ranger.finance/trade)
+- **perps mcp API docs:** [https://www.app.ranger.finance/trade](https://www.app.ranger.finance/trade)
 - **FastMCP docs:** [https://modelcontextprotocol.io](https://modelcontextprotocol.io)
 - **Ask your dev team or open an issue in your repo!**
 
