@@ -187,14 +187,14 @@ class GetTradeHistoryResponse(BaseModel):
 class Liquidation(BaseModel):
     id: str
     market_id: str
-    user_account: str
+    user_account: str | None = None
     liquidator: str
     platform: str  # Changed from Platform to str
     quantity: float
     price: float
     created_at: str
     liquidator_reward: float
-    insurance_fund_fee: float
+    insurance_fund_fee: float | None = None
 
 
 class LiquidationTotals(BaseModel):
