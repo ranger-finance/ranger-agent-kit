@@ -8,7 +8,8 @@ dependencies = [
     "fastmcp>=2.0.0", # Use the version based on jlowin-fastmcp.txt
     "httpx>=0.25.0",
     "pydantic-settings>=2.0.0",
-    "python-dotenv>=1.0.0"
+    "pytest>=8.3.5",
+    "python-dotenv>=1.0.0",
 ]
 
 [project.scripts]
@@ -22,4 +23,9 @@ build-backend = "hatchling.build"
 # Add your preferred ruff configurations 
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/ranger_mcp"] 
+packages = ["src/ranger_mcp"]
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+httpx = "*"
+python-dotenv = "*" 

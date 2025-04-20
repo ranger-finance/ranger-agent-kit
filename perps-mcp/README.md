@@ -84,3 +84,18 @@ _Claude (to User):_ "Ranger quotes an average price of $XXX.XX for 1 SOL with $1
 _User:_ "Okay, execute that trade."
 _Claude:_ Calls tool `sor_increase_position`.
 _Claude:_ "Okay, I've prepared the transaction. Here is the message: `[base64_message]`. Please sign and submit this using your wallet."
+
+## Integration Testing
+
+Integration tests are located in the `tests/` directory. They use `pytest`, `httpx`, and `python-dotenv`.
+
+- Place your API key in a `.env` file at the project root:
+  ```
+  API_KEY=sk_test=
+  ```
+- To run the tests:
+  ```sh
+  pytest -vv
+  ```
+
+The tests will use the API key from `.env` if present, or fall back to a default test key.

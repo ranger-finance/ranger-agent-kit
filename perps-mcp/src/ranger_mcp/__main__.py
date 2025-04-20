@@ -14,8 +14,7 @@ if str(src_path) not in sys.path:
 def main():
     # Run the main hub server
     # This will use stdio by default, compatible with Claude Desktop
-    ranger_mcp.run()
-
+    ranger_mcp.run(transport="sse")
 
 if __name__ == "__main__":
     main()
