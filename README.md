@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/RangerAgentKit.png" alt="Ranger Agent Kit Banner" width="320" />
+  <img src="assets/RangerAgentKit.png" alt="Ranger Agent Kit Banner" width="580" />
 </p>
 
 # ranger-agent-kit
